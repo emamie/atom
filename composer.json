@@ -18,7 +18,6 @@
         "doctrine/dbal": "~2.3",
         "mpociot/laravel-apidoc-generator": "dev-master",
         "encore/laravel-admin": "1.5.*",
-        "emamie/intl-datetime": "dev-master",
         "maatwebsite/excel": "3.2.x-dev"
     },
     "autoload": {

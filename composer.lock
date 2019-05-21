@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e57cdeda469a9b05a0b0eefc9fcf583b",
+    "content-hash": "5bf58b8673e1cda8f55196bcc39c4d62",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -479,52 +479,6 @@
                 "validator"
             ],
             "time": "2018-12-04T22:38:24+00:00"
-        },
-        {
-            "name": "emamie/intl-datetime",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/emamie/IntlDateTime.git",
-                "reference": "7d57958b13bc085720ed78e19fbc95b125186f31"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/emamie/IntlDateTime/zipball/7d57958b13bc085720ed78e19fbc95b125186f31",
-                "reference": "7d57958b13bc085720ed78e19fbc95b125186f31",
-                "shasum": ""
-            },
-            "require": {
-                "ext-intl": "*",
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": ">=4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Emamie\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ali Farhadi",
-                    "email": "a.farhadi@gmail.com",
-                    "homepage": "http://farhadi.ir/"
-                },
-                {
-                    "name": "Hassan Emamie",
-                    "email": "h.emamie@gmail.com",
-                    "homepage": "http://emamie.com/"
-                }
-            ],
-            "description": "An extented version of php 5 DateTime class with integrated IntlDateFormatter functionality which adds support for multiple calendars and locales provided by ICU project.",
-            "time": "2019-02-09T06:44:53+00:00"
         },
         {
             "name": "encore/laravel-admin",
@@ -3911,7 +3865,6 @@
         "infyomlabs/laravel-generator": 20,
         "infyomlabs/adminlte-templates": 20,
         "mpociot/laravel-apidoc-generator": 20,
-        "emamie/intl-datetime": 20,
         "maatwebsite/excel": 20
     },
     "prefer-stable": false,
