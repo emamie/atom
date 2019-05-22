@@ -4,8 +4,51 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1ba8b816a4588a13bff47c9b37003767",
+    "content-hash": "9acb05f141cd0c5965819f1c0bdb5c98",
     "packages": [
+        {
+            "name": "caouecs/laravel-lang",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/caouecs/Laravel-lang.git",
+                "reference": "f61cda21246922a7aa2ad8c9923e9fe9f0a7881c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/caouecs/Laravel-lang/zipball/f61cda21246922a7aa2ad8c9923e9fe9f0a7881c",
+                "reference": "f61cda21246922a7aa2ad8c9923e9fe9f0a7881c",
+                "shasum": ""
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.10"
+            },
+            "suggest": {
+                "ablunier/laravel-lang-installer": "Command for easily add languages to a Laravel project",
+                "andrey-helldar/laravel-lang-publisher": "Easy installation and update of translation files for your project",
+                "arcanedev/laravel-lang": "Translations manager and checker for Laravel 5",
+                "overtrue/laravel-lang": "Command to add languages in your project"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "caouecs",
+                    "email": "caouecs@caouecs.net"
+                }
+            ],
+            "description": "Languages for Laravel",
+            "keywords": [
+                "lang",
+                "languages",
+                "laravel",
+                "lpm"
+            ],
+            "time": "2019-05-07T18:43:05+00:00"
+        },
         {
             "name": "doctrine/cache",
             "version": "dev-master",
@@ -3907,7 +3950,8 @@
         "infyomlabs/adminlte-templates": 20,
         "mpociot/laravel-apidoc-generator": 20,
         "maatwebsite/excel": 20,
-        "farhadi/intl-datetime": 20
+        "farhadi/intl-datetime": 20,
+        "caouecs/laravel-lang": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

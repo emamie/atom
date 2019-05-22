@@ -19,7 +19,8 @@
         "mpociot/laravel-apidoc-generator": "dev-master",
         "encore/laravel-admin": "1.5.*",
         "maatwebsite/excel": "3.2.x-dev",
-        "farhadi/intl-datetime": "dev-master"
+        "farhadi/intl-datetime": "dev-master",
+        "caouecs/laravel-lang": "dev-master"
     },
     "autoload": {
         "psr-4": {
