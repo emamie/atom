@@ -18,7 +18,8 @@
         "doctrine/dbal": "~2.3",
         "mpociot/laravel-apidoc-generator": "dev-master",
         "encore/laravel-admin": "1.5.*",
-        "maatwebsite/excel": "3.2.x-dev"
+        "maatwebsite/excel": "3.2.x-dev",
+        "farhadi/intl-datetime": "dev-master"
     },
     "autoload": {
         "psr-4": {

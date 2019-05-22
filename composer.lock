@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5bf58b8673e1cda8f55196bcc39c4d62",
+    "content-hash": "1ba8b816a4588a13bff47c9b37003767",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -596,6 +596,47 @@
                 "parser"
             ],
             "time": "2018-06-11T18:15:32+00:00"
+        },
+        {
+            "name": "farhadi/intl-datetime",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/farhadi/IntlDateTime.git",
+                "reference": "4f500ffeb75d37e72961cdb79f1ca1cbeec27f47"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/farhadi/IntlDateTime/zipball/4f500ffeb75d37e72961cdb79f1ca1cbeec27f47",
+                "reference": "4f500ffeb75d37e72961cdb79f1ca1cbeec27f47",
+                "shasum": ""
+            },
+            "require": {
+                "ext-intl": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "farhadi\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ali Farhadi",
+                    "email": "a.farhadi@gmail.com",
+                    "homepage": "http://farhadi.ir/"
+                }
+            ],
+            "description": "An extented version of php 5 DateTime class with integrated IntlDateFormatter functionality which adds support for multiple calendars and locales provided by ICU project.",
+            "time": "2015-10-10T11:18:35+00:00"
         },
         {
             "name": "fzaninotto/faker",
@@ -3865,7 +3906,8 @@
         "infyomlabs/laravel-generator": 20,
         "infyomlabs/adminlte-templates": 20,
         "mpociot/laravel-apidoc-generator": 20,
-        "maatwebsite/excel": 20
+        "maatwebsite/excel": 20,
+        "farhadi/intl-datetime": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
