@@ -21,7 +21,8 @@ class AtomServiceProvider extends ServiceProvider
          */
         if ($this->app->runningInConsole()) {
             $this->commands([
-                ApiGenerator\Command\APIGeneratorCommand::class,
+                Command\InstallCommand::class,
+                Command\APIGeneratorCommand::class,
             ]);
         }
 

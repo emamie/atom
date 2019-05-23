@@ -1,6 +1,6 @@
 <?php
 
-namespace Emamie\Atom\ApiGenerator\Command;
+namespace Emamie\Atom\Command;
 
 use InfyOm\Generator\Commands\API\APIGeneratorCommand as InfyOmAPIGeneratorCommand;
 use Emamie\Atom\ApiGenerator\CommandData;
