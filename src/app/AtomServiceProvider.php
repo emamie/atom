@@ -44,11 +44,6 @@ class AtomServiceProvider extends ServiceProvider
         ], 'public');
 
         /*
-         * Register ClearCache middleware
-         */
-        $router->aliasMiddleware('clearcache', 'Emamie\\Atom\\Middleware\\ClearCache');
-
-        /*
          * Register api token middleware
          */
         $router->aliasMiddleware('apiauth', 'Emamie\\Atom\\Middleware\\ApiAuth');
