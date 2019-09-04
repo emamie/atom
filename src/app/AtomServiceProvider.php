@@ -4,7 +4,8 @@ namespace Emamie\Atom;
 
 use Illuminate\Support\ServiceProvider;
 use Emamie\Atom\ApiGenerator;
-
+use PHPUnit\Test\Extension;
+use Encore\Admin\Form;
 class AtomServiceProvider extends ServiceProvider
 {
     /**
@@ -15,7 +16,8 @@ class AtomServiceProvider extends ServiceProvider
     public function boot(\Illuminate\Routing\Router $router)
     {
 
-
+        \Encore\Admin\Form::extend('date_persian', admin\Extensions\DatePersianField::class);
+        \Encore\Admin\Form::extend('ckeditor', admin\Extensions\CKEditor::class);
         /*
          * Override ApiGenerator command for atom
          */
@@ -25,7 +27,7 @@ class AtomServiceProvider extends ServiceProvider
                 Command\APIGeneratorCommand::class,
             ]);
         }
-
+        $this->loadViewsFrom(__DIR__.'/../views', 'atom');
         /*
          * Publish config file
          *
