@@ -47,6 +47,7 @@ class InstallCommand extends Command
      */
     public function initDatabase()
     {
+        $this->call('vendor:publish', ['--tag' => 'laravel-admin-migrations']);
         $this->call('migrate');
 
         if (Administrator::count() == 0) {
