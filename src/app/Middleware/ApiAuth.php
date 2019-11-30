@@ -35,11 +35,16 @@ class ApiAuth
     {
         $cfg = $this->getConfigs($service);
 
-        if ($cfg['allow_json_token'] && $cfg['token'] === $request->input($cfg['request_token_name'])) {
-            return true;
+        $input_token = '';
+        if ($cfg['allow_json_token']) {
+            $input_token = $request->input($cfg['request_token_name']);
         }
-        
-        if ($cfg['allow_request_token'] && $cfg['token'] === $request->get($cfg['request_token_name'])) {
+
+        if ($cfg['allow_request_token']) {
+            $input_token = $request->get($cfg['request_token_name']);
+        }
+
+        if( !empty($input_token) && !empty($cfg['tokens']) && in_array($input_token, $cfg['tokens']) === true){
             return true;
         }
 

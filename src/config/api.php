@@ -3,11 +3,15 @@
 return [
     'auth' => [
     	'vendor-example/package-example' => [
-            'token' => env('API_AUTH_VENDOR_PACKAGE_TOKEN', 'token'),// 64 character
-            'request_token_name' => env('API_AUTH_VENDOR_PACKAGE_API_TOKEN', 'api_token'),
-
-            'allow_json_token' => env('API_AUTH_VENDOR_PACKAGE_JSON', true),
-            'allow_request_token' => env('API_AUTH_VENDOR_PACKAGE_REQUEST', true),
+            /*
+    	     'allow_json_token' => env('API_ALLOW_JSON_TOKEN', false),
+             'allow_request_token' => env('API_ALLOW_REQUEST_TOKEN', false),
+    	     'request_token_name' => 'token',// name for token for requests
+    	     'tokens' => [
+    	        'name_for_access' => env('token_for_access'),// sample request: ?request_token_name=token_for_access
+    	        ...
+    	     ],
+    	     */
         ]
     ]
 ];
