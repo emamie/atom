@@ -16,6 +16,8 @@ class AtomServiceProvider extends ServiceProvider
     public function boot(\Illuminate\Routing\Router $router)
     {
 
+        date_default_timezone_set(env('APP_TIMEZONE', "Asia/Tehran"));
+
         \Encore\Admin\Form::extend('date_persian', admin\Extensions\DatePersianField::class);
         \Encore\Admin\Form::extend('ckeditor', admin\Extensions\CKEditor::class);
         /*
