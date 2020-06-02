@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Emamie\Atom\ApiGenerator;
 use PHPUnit\Test\Extension;
 use Encore\Admin\Form;
+use Razavi\Atom\Services\RestWebService;
+
 class AtomServiceProvider extends ServiceProvider
 {
     /**
@@ -77,6 +79,10 @@ class AtomServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->registerConnectionServices();
+    }
+    protected function registerConnectionServices()
+    {
+        $this->app->bind('RestWebService', RestWebService::class);
     }
 }
