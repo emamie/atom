@@ -21,6 +21,17 @@ function atomPersianToGregorian($date, $output_format = "yyyy/MM/dd")
     return $date->format($output_format);
 }
 
+function atomNumToEN($string)
+{
+    $fa = preg_split('//u', '۰۱۲۳۴۵۶۷۸۹', -1, PREG_SPLIT_NO_EMPTY);
+    $ar = preg_split('//u', '٠١٢٣٤٥٦٧٨٩', -1, PREG_SPLIT_NO_EMPTY);
+    $en = preg_split('//u', '0123456789', -1, PREG_SPLIT_NO_EMPTY);
+
+    $arr1 = array_merge($fa, $ar);
+    $arr2 = array_merge($en, $en);
+
+    return str_replace($arr1, $arr2, $string);
+}
 
 function atomIsNationalId($code) {
     if (!preg_match('/^[0-9]{10}$/', $code)) {
