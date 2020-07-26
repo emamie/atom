@@ -12,17 +12,18 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=7.1.0",
-        "infyomlabs/laravel-generator": "5.6.x-dev",
-        "laravelcollective/html": "^5.6.0",
-        "infyomlabs/adminlte-templates": "5.6.x-dev",
-        "doctrine/dbal": "~2.3",
+        "infyomlabs/laravel-generator": "6.0.*",
+        "laravelcollective/html": "^6.0@dev",
+        "infyomlabs/adminlte-templates": "6.0.*",
+        "doctrine/dbal": "~2.10",
         "mpociot/laravel-apidoc-generator": "dev-master",
-        "encore/laravel-admin": "1.5.*",
+        "encore/laravel-admin": "1.8.*",
         "maatwebsite/excel": "3.2.x-dev",
         "farhadi/intl-datetime": "dev-master",
         "caouecs/laravel-lang": "dev-master",
-        "guzzlehttp/guzzle": "~6.0",
-        "predis/predis": "^2.0@dev"
+        "predis/predis": "^2.0@dev",
+        "guzzlehttp/guzzle": "~7.0",
+        "laravel/helpers": "^1.2"
     },
     "autoload": {
         "psr-4": {
