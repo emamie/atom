@@ -55,3 +55,13 @@ function atomIsNationalId($code) {
 
     return false;
 }
+
+
+function atomRplcCharAr2Fa($text){
+    $arabic = array("ي", "ك");
+    $persian = array("ی", "ک");
+
+    return str_replace($arabic,$persian,$text);
+
+}
+
