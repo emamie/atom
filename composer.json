@@ -13,10 +13,10 @@
     "require": {
         "php": ">=7.1.0",
         "infyomlabs/laravel-generator": "6.0.*",
-        "laravelcollective/html": "^6.0@dev",
+        "laravelcollective/html": "^6.1",
         "infyomlabs/adminlte-templates": "6.0.*",
         "doctrine/dbal": "~2.10",
-        "mpociot/laravel-apidoc-generator": "dev-master",
+        "mpociot/laravel-apidoc-generator": "^4.8",
         "encore/laravel-admin": "1.8.*",
         "maatwebsite/excel": "3.2.x-dev",
         "farhadi/intl-datetime": "dev-master",
