@@ -1,5 +1,7 @@
 let mix = require('laravel-mix');
 
+require('laravel-mix-merge-manifest');
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,10 +13,24 @@ let mix = require('laravel-mix');
  |
  */
 
-mix
-	// global library
-    .js('packages/atom/src/assets/js/global.js', 'public/atom/js')
-    .copyDirectory('packages/atom/src/assets/lib', 'public/atom')
+/** in production prevent cache **/
+if (mix.inProduction()) {
+    mix.version();
+}
 
-    // Set version update
-    .version()
+
+/** generate map file in development env */
+if ( ! mix.inProduction()) {
+    mix.webpackConfig({
+        devtool: 'source-map'
+    })
+        .sourceMaps()
+}
+
+mix
+    .mergeManifest()
+
+	// global library
+    .js('packages/atom/src/assets/js/global.js', 'public/vendor/atom/js')
+    .copyDirectory('packages/atom/src/assets/lib', 'public/vendor/atom/lib')
+

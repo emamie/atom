@@ -1,6 +1,6 @@
 <?php
 /*
- * Copy file from app/Admin/bootstrap.php 
+ * Copy file from /vendor/encore/laravel-admin/src/Console/stubs/bootstrap.stub
  *
  * Change  config: admin.directory = base_path('vendor/emamie/atom/src/admin')
  */
@@ -23,9 +23,10 @@
  *
  */
 
-//Encore\Admin\Form::forget(['map', 'editor']);
+// Encore\Admin\Form::forget(['map', 'editor']);
 
-Admin::css('/vendor/bootstrap/css/bootstrap.rtl.full.min.css');
+
+//Admin::css('/vendor/atom/css/bootstrap.rtl.full.min.css');
 /*
  * not need asset: in publish vendor replace by main admin-lte.css
  */

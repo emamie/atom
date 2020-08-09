@@ -47,7 +47,9 @@ class AtomServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../templates/bootstrap' => public_path('vendor/bootstrap'),
             __DIR__.'/../templates/AdminLTE-2.3.5-RTL/css' => public_path('vendor/laravel-admin/AdminLTE/dist/css'),
-        ], 'public');
+            __DIR__.'/../assets/lib' => public_path('vendor/atom'),
+            __DIR__.'/../assets/css/bootstrap.rtl.full.min.css' => public_path('vendor/laravel-admin/AdminLTE/bootstrap/css/bootstrap.min.css'),
+        ], 'atom');
 
         /*
          * Register ClearCache middleware for development
