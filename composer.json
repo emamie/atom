@@ -23,7 +23,8 @@
         "caouecs/laravel-lang": "dev-master",
         "predis/predis": "^2.0@dev",
         "guzzlehttp/guzzle": "~7.0",
-        "laravel/helpers": "^1.2"
+        "laravel/helpers": "^1.2",
+        "morilog/jalali": "3.*"
     },
     "autoload": {
         "psr-4": {
