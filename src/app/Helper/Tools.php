@@ -1,24 +1,27 @@
 <?php
 
-use farhadi\IntlDateTime as DateTime;
+use Carbon\Carbon;
+use Morilog\Jalali\Jalalian;
+use Morilog\Jalali\CalendarUtils;
 
-function atomGregorianToPersian($date, $output_format = "yyyy/MM/dd")
+function atomGregorianToPersian($date, $output_format = "Y/m/d")
 {
-    $date = new DateTime($date, null, 'gregorian');
+    $carbon = new Carbon($date);
 
-    $date->setCalendar('persian');
+    $jdate = Jalalian::fromCarbon($carbon);
 
-    return $date->format($output_format);
+    return $jdate->format($output_format);
 
 }
 
-function atomPersianToGregorian($date, $output_format = "yyyy/MM/dd")
+function atomPersianToGregorian($date, $input_format = "Y/m/d",$output_format = "Y/m/d")
 {
-    $date = new DateTime($date, null, 'persian');
-
-    $date->setCalendar('gregorian');
-
-    return $date->format($output_format);
+    try {
+        $carbon = CalendarUtils::createCarbonFromFormat($input_format, $date);
+    } catch(\Exception $e){
+        $carbon = CalendarUtils::createCarbonFromFormat(str_replace('/', '-', $input_format), $date);
+    }
+    return $carbon->format($output_format);
 }
 
 function atomNumToEN($string)
