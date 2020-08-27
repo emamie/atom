@@ -1,27 +1,62 @@
 <?php
 
 use Carbon\Carbon;
-use Morilog\Jalali\Jalalian;
-use Morilog\Jalali\CalendarUtils;
 
 function atomGregorianToPersian($date, $output_format = "Y/m/d")
 {
-    $carbon = new Carbon($date);
 
-    $jdate = Jalalian::fromCarbon($carbon);
+    if(class_exists('Morilog\\Jalali\\Jalalian')) {
 
-    return $jdate->format($output_format);
+        $carbon = new Carbon($date);
+
+        $jdate = \Morilog\Jalali\Jalalian::fromCarbon($carbon);
+
+        return $jdate->format($output_format);
+
+    } else {
+
+        // @deprecated way : farhadi\IntlDateTime have bug in convert 1357/1/1
+
+        if($output_format == "Y/m/d"){
+            $output_format = "yyyy/MM/dd";
+        }
+
+        $date = new \farhadi\IntlDateTime($date, null, 'gregorian');
+
+        $date->setCalendar('persian');
+
+        return $date->format($output_format);
+    }
 
 }
 
 function atomPersianToGregorian($date, $input_format = "Y/m/d",$output_format = "Y/m/d")
 {
-    try {
-        $carbon = CalendarUtils::createCarbonFromFormat($input_format, $date);
-    } catch(\Exception $e){
-        $carbon = CalendarUtils::createCarbonFromFormat(str_replace('/', '-', $input_format), $date);
+
+    if(class_exists('Morilog\\Jalali\\Jalalian')) {
+
+        try {
+            $carbon = \Morilog\Jalali\CalendarUtils::createCarbonFromFormat($input_format, $date);
+        } catch (\Exception $e) {
+            $carbon = \Morilog\Jalali\CalendarUtils::createCarbonFromFormat(str_replace('/', '-', $input_format), $date);
+        }
+        return $carbon->format($output_format);
+
+    } else {
+
+        // @deprecated way : farhadi\IntlDateTime have bug in convert 1357/1/1
+
+        $output_format = $input_format;
+        if($output_format == "Y/m/d"){
+            $output_format = "yyyy/MM/dd";
+        }
+
+        $date = new \farhadi\IntlDateTime($date, null, 'persian');
+
+        $date->setCalendar('gregorian');
+
+        return $date->format($output_format);
     }
-    return $carbon->format($output_format);
 }
 
 function atomNumToEN($string)
