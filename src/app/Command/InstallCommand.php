@@ -47,7 +47,16 @@ class InstallCommand extends Command
      */
     public function initDatabase()
     {
-        $this->call('vendor:publish', ['--tag' => 'laravel-admin-migrations','--force' => true]);
+
+        $this->call('vendor:publish', ['--tag' => 'laravel-admin-assets','--force' => true]);
+        ## $this->call('vendor:publish', ['--tag' => 'laravel-admin-config','--force' => true]);
+        ## $this->call('vendor:publish', ['--tag' => 'laravel-admin-lang','--force' => true]);
+        # migration copy to atom
+        ## $this->call('vendor:publish', ['--tag' => 'laravel-admin-migrations','--force' => true]);
+
+        $this->call('vendor:publish', ['--tag' => 'atom-assets','--force' => true]);
+
+        $this->call('vendor:publish', ['--tag' => 'atom-migrations','--force' => true]);
         $this->call('migrate',['--force' => true]);
 
         if (Administrator::count() == 0) {

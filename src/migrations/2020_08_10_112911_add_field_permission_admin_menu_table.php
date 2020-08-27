@@ -13,10 +13,10 @@ class AddFieldPermissionAdminMenuTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::table('admin_menu', function(Blueprint $table) {
-            $table->string('permission')->nullable();
+        $connection = config('admin.database.connection') ?: config('database.default');
 
+        Schema::connection($connection)->table(config('admin.database.menu_table'), function(Blueprint $table) {
+            $table->string('permission')->nullable();
         });
     }
 
