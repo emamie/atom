@@ -24,7 +24,8 @@
         "predis/predis": "^2.0@dev",
         "guzzlehttp/guzzle": "~7.0",
         "laravel/helpers": "^1.2",
-        "morilog/jalali": "3.*"
+        "morilog/jalali": "3.*",
+        "pragmarx/yaml": "dev-master"
     },
     "autoload": {
         "psr-4": {
