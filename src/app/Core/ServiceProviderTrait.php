@@ -138,8 +138,6 @@ trait ServiceProviderTrait
             __DIR__.'/../../webinar.yml' => config_path('webinar.yml'),
         ], 'configuration');
 
-        \Yaml::loadToConfig(config_path('webinar.yml'), 'webinar');
-
 
         $this->bootExtend();
 
