@@ -57,6 +57,9 @@ class InstallCommand extends Command
         $this->call('vendor:publish', ['--tag' => 'atom-assets','--force' => true]);
 
         $this->call('vendor:publish', ['--tag' => 'atom-migrations','--force' => true]);
+
+        $this->call('vendor:publish', ['--tag' => 'migrations','--force' => true]);
+
         $this->call('migrate',['--force' => true]);
 
         if (Administrator::count() == 0) {

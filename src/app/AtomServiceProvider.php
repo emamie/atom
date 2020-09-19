@@ -46,15 +46,17 @@ class AtomServiceProvider extends ServiceProvider
          */
         if ($this->app->runningInConsole()) {
 
-            $this->publishes([__DIR__ .'/../migrations' => database_path('migrations')], 'atom-migrations');
+            $this->publishes([
+                __DIR__ .'/../migrations' => database_path('migrations'),
+            ], ['atom','migrations','atom-migrations']);
 
             $this->publishes([
                 __DIR__ . '/../templates/bootstrap' => public_path('vendor/bootstrap'),
                 __DIR__ . '/../templates/AdminLTE-2.3.5-RTL/css' => public_path('vendor/laravel-admin/AdminLTE/dist/css'),
                 __DIR__ . '/../assets/lib' => public_path('vendor/atom'),
                 __DIR__ . '/../assets/css/bootstrap.rtl.full.min.css' => public_path('vendor/laravel-admin/AdminLTE/bootstrap/css/bootstrap.min.css'),
-            ], 'atom-assets');
-            
+            ], ['atom','assets','atom-assets']);
+
         }
 
         /*
@@ -71,13 +73,6 @@ class AtomServiceProvider extends ServiceProvider
          * Load backend route
          */
         $this->loadRoutesFrom(__DIR__.'/../routes/backend.php');
-
-        /*
-         * publish migrations
-         */
-        $this->publishes([
-            __DIR__.'/../migrations/' => database_path('migrations')
-        ], 'migrations');
     }
 
     /**
