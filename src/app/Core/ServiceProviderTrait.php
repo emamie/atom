@@ -8,7 +8,11 @@ use Illuminate\Contracts\Container\Container;
 
 trait ServiceProviderTrait
 {
+    protected $package_path;
+
     protected $package_key;
+
+    protected $package_namespace;
 
     /**
      * Register services.
@@ -17,7 +21,8 @@ trait ServiceProviderTrait
      */
     public function register()
     {
-        $this->setPkgKey();
+        $this->load();
+
         /**
          * change default ExceptionHandler
          */
@@ -25,10 +30,6 @@ trait ServiceProviderTrait
             \Illuminate\Contracts\Debug\ExceptionHandler::class,
             Exceptions\Handler::class
         );
-
-        $this->registerRouteMiddleware();
-
-        $this->registerConnectionServices();
 
         $this->registerExtend();
     }
@@ -49,38 +50,37 @@ trait ServiceProviderTrait
             ]);
         }
 
-        /** clear cache in local env */
-        \Route::group(['middleware'=>['clearcache']], function(Router $router) {
+        /*
+         * Auth routes
+         *
+         * Load from vendor/encore/laravel-admin/src/Admin.php@registerAuthRoutes()
+         */
+        \Route::group([
+            'prefix' => config('admin.route.prefix'),
+            'namespace' => 'Encore\Admin\Controllers',
+            'middleware' => config('admin.route.middleware'),
+        ], function (Router $router) {
+
+            $route = __DIR__ . '/../routes/backend-auth.php';
+            if (file_exists($route)) $this->loadRoutesFrom($route);
+
+        });
+
+        /**
+         * Load routes only for specific domains
+         */
+        if( in_array(request()->getHttpHost(), (array) config('app.' . $this->package_key . '.domains'))) {
 
             /*
              * load api routes
              */
-
             \Route::group([
-                'prefix' => 'api',
-                'namespace' => 'Razavi\\Webinar\\ApiController',
-                'middleware' => ['apiauth:razavi/webinar'],
+                'prefix' => config('app.' . $this->package_key . '.api_prefix', 'api'),
+                'namespace' => $this->package_namespace . '\\Api',
+                'middleware' => $this->middlewaresApi(),
             ], function (Router $router) {
-
-                $route = __DIR__ . '/../routes/api.php';
+                $route = realpath($this->package_path . '/../routes/api.php');
                 if (file_exists($route)) $this->loadRoutesFrom($route);
-
-            });
-
-            /*
-             * Auth routes
-             *
-             * Load from vendor/encore/laravel-admin/src/Admin.php@registerAuthRoutes()
-             */
-            \Route::group([
-                'prefix' => config('admin.route.prefix'),
-                'namespace' => 'Encore\Admin\Controllers',
-                'middleware' => config('admin.route.middleware'),
-            ], function (Router $router) {
-
-                $route = __DIR__ . '/../routes/backend-auth.php';
-                if (file_exists($route)) $this->loadRoutesFrom($route);
-
             });
 
             /*
@@ -88,7 +88,7 @@ trait ServiceProviderTrait
              */
             \Route::group([
                 'prefix' => config('admin.route.prefix'),
-                'namespace' => 'Razavi\\Webinar\\BackendController',
+                'namespace' => 'Razavi\\Webinar\\Backend',
                 'middleware' => config('admin.route.middleware'),
             ], function (Router $router) {
 
@@ -110,34 +110,29 @@ trait ServiceProviderTrait
                 if (file_exists($route)) $this->loadRoutesFrom($route);
 
             });
-
-        });
+        }
 
         /*
          * Load views
          */
-        $this->loadViewsFrom(__DIR__.'/../views', $this->package_key);
+        $this->loadViewsFrom(realpath($this->package_path . '/../views'), $this->package_key);
 
         /*
          * Load translations
          */
-        $this->loadTranslationsFrom(__DIR__.'/../translations', $this->package_key);
-
+        $this->loadTranslationsFrom(realpath($this->package_path . '/../translations'), $this->package_key);
 
         /*
          * publish migrations
          */
-        $this->publishes([
-            $this->publishMigrations()
-        ], 'migrations');
+        $this->publishes(
+            $this->publishMigrations(), 'migrations');
 
         /*
          * publish configurations
          */
-        $this->publishes([
-            __DIR__.'/../../webinar.yml' => config_path('webinar.yml'),
-        ], 'configuration');
-
+        $this->publishes(
+            $this->publishConfigurations(), 'configurations');
 
         $this->bootExtend();
 
@@ -153,6 +148,36 @@ trait ServiceProviderTrait
         //
     }
 
+    protected function middlewaresGlobal()
+    {
+        $middlewares = [];
+
+        if(\App::isLocal()){
+            $middlewares[] = 'clearcache';
+        }
+
+        return $middlewares;
+    }
+
+    protected function middlewaresApi()
+    {
+        $middlewares = $this->middlewaresGlobal();
+
+        // @TODO : replace with passport method
+        $middlewares[] = 'apiauth:razavi/' . $this->package_key;
+
+        return $middlewares;
+    }
+
+    protected function load()
+    {
+        $this->setPkgPath();
+
+        $this->setPkgKey();
+
+        $this->setPkgNamespace();
+    }
+
     /**
      *
      *
@@ -161,7 +186,7 @@ trait ServiceProviderTrait
     protected function publishMigrations()
     {
         return [
-            __DIR__.'/../migrations/' => database_path('migrations'),
+            realpath($this->package_path . '/../migrations/') => database_path('migrations'),
         ];
     }
 
@@ -171,7 +196,7 @@ trait ServiceProviderTrait
     protected function publishConfigurations()
     {
         return [
-            __DIR__.'/../../config.php' => config_path('atom/' . $this->package_key . '.php'),
+            realpath($this->package_path . '/../../config.php') => config_path( 'app/' . $this->package_key . '.php'),
         ];
     }
 
@@ -180,14 +205,30 @@ trait ServiceProviderTrait
      */
     protected function setPkgKey()
     {
-        $classname = get_class($this);
+        $config = include_once realpath($this->package_path . '/../../config.php');
 
-        $classname_array = explode('\\', $classname);
-
-        if(!empty($classname_array[1])) {
-            $this->package_key = $classname_array[1];
+        if(!empty($config['key'])) {
+            $this->package_key = $config['key'];
         } else {
-            throw new \Exception('package key not found');
+            throw new \Exception('package key is empty');
         }
+    }
+
+    protected function setPkgPath()
+    {
+        $reflector = new \ReflectionClass(get_class());
+
+        $fn = $reflector->getFileName();
+
+        $this->package_path = dirname($fn);
+    }
+
+    protected function setPkgNamespace()
+    {
+        $reflector = new \ReflectionClass(get_class());
+
+        $namespace = $reflector->getNamespaceName();
+
+        $this->package_namespace = $namespace;
     }
 }
