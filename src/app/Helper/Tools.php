@@ -103,3 +103,17 @@ function atomRplcCharAr2Fa($text){
 
 }
 
+/**
+ * @TODO reimplementation as service
+ */
+function atomSendSMS($mobile, $text, $package='default', $id=0){
+    $input_sms = [
+        'table_name' => $package,
+        'pid' => $id,
+        'text' => $text,
+        'mobile' => $mobile,
+        'status_send' => 0
+    ];
+    \Razavi\Salamat\Model\Sms::firstOrCreate($input_sms);
+}
+
