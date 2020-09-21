@@ -54,11 +54,13 @@ class InstallCommand extends Command
         # migration copy to atom
         ## $this->call('vendor:publish', ['--tag' => 'laravel-admin-migrations','--force' => true]);
 
-        $this->call('vendor:publish', ['--tag' => 'atom-assets','--force' => true]);
-
-        $this->call('vendor:publish', ['--tag' => 'atom-migrations','--force' => true]);
+        $this->call('vendor:publish', ['--tag' => 'laravel-admin-media-player','--force' => true]);
 
         $this->call('vendor:publish', ['--tag' => 'migrations','--force' => true]);
+
+        $this->call('vendor:publish', ['--tag' => 'configurations','--force' => true]);
+
+        $this->call('vendor:publish', ['--tag' => 'atom','--force' => true]);
 
         $this->call('migrate',['--force' => true]);
 
