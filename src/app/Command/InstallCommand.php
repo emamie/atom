@@ -12,7 +12,7 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $name = 'atom:install';
+    protected $signature = 'atom:install {action?}';
 
     /**
      * The console command description.
@@ -35,19 +35,23 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        $this->initDatabase();
-
-        $this->initAdminDirectory();
+        switch ($this->argument('action')) {
+            case 'publish':
+                $this->vendorPublish();
+                break;
+            case 'database':
+                $this->initDatabase();
+                break;
+            default:
+                $this->vendorPublish();
+                $this->initDatabase();
+                $this->initAdminDirectory();
+                break;
+        }
     }
 
-    /**
-     * Create tables and seed it.
-     *
-     * @return void
-     */
-    public function initDatabase()
+    public function vendorPublish()
     {
-
         $this->call('vendor:publish', ['--tag' => 'laravel-admin-assets','--force' => true]);
         ## $this->call('vendor:publish', ['--tag' => 'laravel-admin-config','--force' => true]);
         ## $this->call('vendor:publish', ['--tag' => 'laravel-admin-lang','--force' => true]);
@@ -61,7 +65,15 @@ class InstallCommand extends Command
         $this->call('vendor:publish', ['--tag' => 'configurations','--force' => true]);
 
         $this->call('vendor:publish', ['--tag' => 'atom','--force' => true]);
+    }
 
+    /**
+     * Create tables and seed it.
+     *
+     * @return void
+     */
+    public function initDatabase()
+    {
         $this->call('migrate',['--force' => true]);
 
         if (Administrator::count() == 0) {
