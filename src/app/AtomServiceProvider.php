@@ -7,6 +7,7 @@ use Emamie\Atom\ApiGenerator;
 use PHPUnit\Test\Extension;
 use Encore\Admin\Form;
 use Razavi\Atom\Services\RestWebService;
+use Emamie\Atom\Exceptions;
 
 class AtomServiceProvider extends ServiceProvider
 {
@@ -83,6 +84,14 @@ class AtomServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        /**
+         * change default ExceptionHandler
+         */
+        $this->app->singleton(
+            \Illuminate\Contracts\Debug\ExceptionHandler::class,
+            Exceptions\Handler::class
+        );
+
         $this->registerConnectionServices();
     }
     protected function registerConnectionServices()

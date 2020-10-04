@@ -2,7 +2,6 @@
 
 namespace Emamie\Atom\Core;
 
-use Emamie\Atom\Exceptions;
 use Illuminate\Routing\Router;
 use Illuminate\Contracts\Container\Container;
 
@@ -22,15 +21,6 @@ trait ServiceProviderTrait
     public function register()
     {
         $this->load();
-
-        /**
-         * change default ExceptionHandler
-         */
-        $this->app->singleton(
-            \Illuminate\Contracts\Debug\ExceptionHandler::class,
-            Exceptions\Handler::class
-        );
-
         $this->registerExtend();
     }
 
