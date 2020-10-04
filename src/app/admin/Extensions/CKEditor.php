@@ -7,8 +7,8 @@ use Encore\Admin\Form\Field;
 class CKEditor extends Field
 {
     public static $js = [
-        '/vendor/atom/lib/ckeditor/ckeditor.js',
-        '/vendor/atom/lib/ckeditor/adapters/jquery.js',
+        '/vendor/atom/ckeditor/ckeditor.js',
+        '/vendor/atom/ckeditor/adapters/jquery.js',
     ];
 
     protected $view = 'atom::ckeditor';
