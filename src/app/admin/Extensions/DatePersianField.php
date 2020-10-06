@@ -8,12 +8,12 @@ use Encore\Admin\Form\Field\Text;
 class DatePersianField extends Text
 {
     protected static $css = [
-        '/vendor/atom/lib/date_picker_persian/persian-datepicker.css',
+        '/vendor/atom/date_picker_persian/persian-datepicker.css',
     ];
 
     protected static $js = [
-        '/vendor/atom/lib/date_picker_persian/persian-date.min.js',
-        '/vendor/atom/lib/date_picker_persian/persian-datepicker.js',
+        '/vendor/atom/date_picker_persian/persian-date.min.js',
+        '/vendor/atom/date_picker_persian/persian-datepicker.js',
 
     ];
 
@@ -65,7 +65,7 @@ class DatePersianField extends Text
             $str_min_max_date =$str_min_max_date.  " maxDate : " . $this->maxDate ;
         }
         $this->script = "$(document).ready(function() {
-//        alert(new persianDate('1399/06/25').unix());
+       // alert(new persianDate('1399/06/25').unix());
                             $('#" . $this->id . "').pDatepicker({
                                 format: '" . $this->format . "',
                                 autoClose: true ,

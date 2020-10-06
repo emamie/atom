@@ -118,20 +118,31 @@ function atomSendSMS($mobile, $text, $package='default', $id=0){
 }
 
 
+function atomIsExistUrl($url) {
 
-function atomIsExistUrl($url)
-{
+
+  $file_headers = @get_headers($url);
+  if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') {
+    return false;
+  }
+  else {
+
+
     $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_NOBODY, true);
-    curl_exec($ch);
-    $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-    if ($code == 200) {
-        $status = true;
-    } else {
-        $status = false;
-    }
+    curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    $data = curl_exec($ch);
+    $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
+    if ($httpcode >= 200 && $httpcode < 300) {
+      $status = TRUE;
+    }
+    else {
+      $status = FALSE;
+    }
+
     return $status;
+  }
 }
 
