@@ -2,6 +2,7 @@
 
 namespace Emamie\Atom;
 
+use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use Emamie\Atom\ApiGenerator;
 use PHPUnit\Test\Extension;
@@ -72,9 +73,21 @@ class AtomServiceProvider extends ServiceProvider
         $router->aliasMiddleware('apiauth', 'Emamie\\Atom\\Middleware\\ApiAuth');
 
         /*
-         * Load backend route
+         * Auth routes
+         *
+         * Load from vendor/encore/laravel-admin/src/Admin.php@registerAuthRoutes()
          */
-        $this->loadRoutesFrom(__DIR__.'/../routes/backend.php');
+        \Route::group([
+            'prefix' => config('admin.route.prefix'),
+            'namespace' => 'Encore\Admin\Controllers',
+            'middleware' => config('admin.route.middleware'),
+        ], function (Router $router) {
+
+            $route = __DIR__ . '/../routes/backend.php';
+            if (file_exists($route)) $this->loadRoutesFrom($route);
+
+        });
+
     }
 
     /**
