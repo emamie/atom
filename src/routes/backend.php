@@ -7,12 +7,6 @@
  */
 // \Admin::registerAuthRoutes();
 
-Route::get('auth/login', 'AuthController@getLogin');
-Route::post('auth/login', 'AuthController@postLogin');
-Route::get('auth/logout', 'AuthController@getLogout');
-Route::get('auth/setting', 'AuthController@getSetting');
-Route::put('auth/setting', 'AuthController@putSetting');
-
 Route::resource('auth/users', 'UserController');
 Route::resource('auth/roles', 'RoleController');
 Route::resource('auth/permissions', 'PermissionController');

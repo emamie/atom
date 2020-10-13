@@ -79,6 +79,23 @@ class AtomServiceProvider extends ServiceProvider
          */
         \Route::group([
             'prefix' => config('admin.route.prefix'),
+//            'namespace' => 'Encore\Admin\Controllers',
+            'namespace' => 'Emamie\Atom\Auth',
+            'middleware' => config('admin.route.middleware'),
+        ], function (Router $router) {
+
+            $route = __DIR__ . '/../routes/backend-auth.php';
+            if (file_exists($route)) $this->loadRoutesFrom($route);
+
+        });
+
+        /*
+         * Backend routes
+         *
+         * Load from vendor/encore/laravel-admin/src/Admin.php@registerAuthRoutes()
+         */
+        \Route::group([
+            'prefix' => config('admin.route.prefix'),
             'namespace' => 'Encore\Admin\Controllers',
             'middleware' => config('admin.route.middleware'),
         ], function (Router $router) {
