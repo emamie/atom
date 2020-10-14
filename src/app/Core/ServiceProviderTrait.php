@@ -4,6 +4,7 @@ namespace Emamie\Atom\Core;
 
 use Illuminate\Routing\Router;
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Console\Scheduling\Schedule;
 
 trait ServiceProviderTrait
 {
@@ -39,6 +40,15 @@ trait ServiceProviderTrait
 
             ]);
         }
+
+        /*
+         * Add Schedule Task To Run
+         */
+        $this->app->booted(function () {
+            $schedule = $this->app->make(Schedule::class);
+            $this->schedule($schedule);
+        });
+
 
         /*
          * Auth routes
@@ -220,5 +230,17 @@ trait ServiceProviderTrait
         $namespace = $reflector->getNamespaceName();
 
         $this->package_namespace = $namespace;
+    }
+
+    protected function schedule($schedule)
+    {
+        /*
+        $schedule->command('sample:command')
+            ->withoutOverlapping(10)// lock 10 minutes
+            ->onOneServer()
+            ->runInBackground()
+            ->everyMinute()
+            ->appendOutputTo(storage_path('logs/cron-'. $this->package_key .'-'. date("YmdH") .'.log'));
+        */
     }
 }
