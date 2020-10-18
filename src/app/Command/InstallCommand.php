@@ -37,15 +37,16 @@ class InstallCommand extends Command
     {
         switch ($this->argument('action')) {
             case 'publish':
+                $this->initAdminDirectory();
                 $this->vendorPublish();
                 break;
             case 'database':
                 $this->initDatabase();
                 break;
             default:
+                $this->initAdminDirectory();
                 $this->vendorPublish();
                 $this->initDatabase();
-                $this->initAdminDirectory();
                 break;
         }
     }

@@ -34,19 +34,19 @@ class AtomServiceProvider extends ServiceProvider
             ]);
         }
         $this->loadViewsFrom(__DIR__.'/../views', 'atom');
-        /*
-         * Publish config file
-         *
-         * php artisan vendor:publish --provider="Emamie\Atom\AtomServiceProvider"
-         */
-        $this->publishes([
-            realpath(__DIR__.'/../config') => config_path('atom'),
-        ]);
 
         /*
          * Publish assets
          */
         if ($this->app->runningInConsole()) {
+
+            /*
+             * php artisan vendor:publish --tag=atom
+             */
+
+            $this->publishes([
+                realpath(__DIR__.'/../config') => config_path(''),
+            ], ['atom','configurations','atom-configuration']);
 
             $this->publishes([
                 __DIR__ .'/../migrations' => database_path('migrations'),
@@ -57,6 +57,7 @@ class AtomServiceProvider extends ServiceProvider
                 __DIR__ . '/../templates/AdminLTE-2.3.5-RTL/css' => public_path('vendor/laravel-admin/AdminLTE/dist/css'),
                 __DIR__ . '/../templates/AdminLTE-2.3.5-RTL/fonts' => public_path('vendor/laravel-admin/AdminLTE/dist/fonts'),
                 __DIR__ . '/../assets/lib' => public_path('vendor/atom'),
+                __DIR__ . '/../assets/img' => public_path('vendor/atom/img'),
                 __DIR__ . '/../assets/css/bootstrap.rtl.full.min.css' => public_path('vendor/laravel-admin/AdminLTE/bootstrap/css/bootstrap.min.css'),
             ], ['atom','assets','atom-assets']);
 
