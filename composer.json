@@ -35,8 +35,9 @@
         "league/flysystem-aws-s3-v3": "~1.0",
         "league/flysystem-cached-adapter": "~1.0",
         "laravel-admin-ext/media-player": "dev-master",
-        "sentry/sentry-laravel": "^2.0"
-
+        "sentry/sentry-laravel": "^2.0",
+        "artisaninweb/laravel-soap": "^0.3.0.9",
+        "mews/captcha": "^3.2"
     },
     "autoload": {
         "psr-4": {
