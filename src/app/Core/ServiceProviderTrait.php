@@ -70,7 +70,6 @@ trait ServiceProviderTrait
          * Load routes only for specific domains
          */
         if( in_array(request()->getHttpHost(), (array) config('app.' . $this->package_key . '.domains'))) {
-
             /*
              * load api routes
              */
