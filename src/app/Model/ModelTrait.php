@@ -12,11 +12,11 @@ trait ModelTrait
 
         $classname = explode('\\', $classname);
 
-        if (isset($classname[1])) dd(strtolower($classname[1]));
-        return $pos;
+        //if (isset($classname[1])) dd(strtolower($classname[1]));
+        //return $pos;
 
-        dd();
-        die;
+        //dd();
+        //die;
         //$table_prefix = config();
         return $this->connection;
     }

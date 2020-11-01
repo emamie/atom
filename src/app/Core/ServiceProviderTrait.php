@@ -87,11 +87,11 @@ trait ServiceProviderTrait
              */
             \Route::group([
                 'prefix' => config('admin.route.prefix'),
-                'namespace' => 'Razavi\\Webinar\\Backend',
+                'namespace' => $this->package_namespace . '\\BackendController',
                 'middleware' => config('admin.route.middleware'),
             ], function (Router $router) {
 
-                $route = __DIR__ . '/../routes/backend.php';
+                $route = realpath($this->package_path . '/../routes/backend.php');
                 if (file_exists($route)) $this->loadRoutesFrom($route);
 
             });
@@ -101,11 +101,11 @@ trait ServiceProviderTrait
              */
             \Route::group([
                 // 'prefix'        => '',
-                'namespace' => 'Razavi\\Webinar\\FrontendController',
+                'namespace' => $this->package_namespace . '\\FrontendController',
                 'middleware' => ['web'],
             ], function (Router $router) {
 
-                $route = __DIR__ . '/../routes/frontend.php';
+                $route = realpath($this->package_path . '/../routes/frontend.php');
                 if (file_exists($route)) $this->loadRoutesFrom($route);
 
             });
@@ -209,7 +209,8 @@ trait ServiceProviderTrait
         if(!empty($config['key'])) {
             $this->package_key = $config['key'];
         } else {
-            throw new \Exception('package key is empty');
+            // @TODO fix error on console
+            // throw new \Exception('package key is empty');
         }
     }
 
