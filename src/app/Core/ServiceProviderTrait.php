@@ -67,48 +67,33 @@ trait ServiceProviderTrait
         });
 
         /**
-         * Load routes only for specific domains
+         * Load routes only for package domains
          */
         if( in_array(request()->getHttpHost(), (array) config('app.' . $this->package_key . '.domains'))) {
-            /*
-             * load api routes
-             */
-            \Route::group([
-                'prefix' => config('app.' . $this->package_key . '.api_prefix', 'api'),
-                'namespace' => $this->package_namespace . '\\Api',
-                'middleware' => $this->middlewaresApi(),
-            ], function (Router $router) {
-                $route = realpath($this->package_path . '/../routes/api.php');
-                if (file_exists($route)) $this->loadRoutesFrom($route);
-            });
 
             /*
-             * Backend routes
+             * routes load
              */
-            \Route::group([
-                'prefix' => config('admin.route.prefix'),
-                'namespace' => $this->package_namespace . '\\BackendController',
-                'middleware' => config('admin.route.middleware'),
-            ], function (Router $router) {
+            $routes_load = $this->routesLoad();
 
-                $route = realpath($this->package_path . '/../routes/backend.php');
-                if (file_exists($route)) $this->loadRoutesFrom($route);
+            if(is_array($routes_load)){
 
-            });
+                foreach ($routes_load as $route_load){
 
-            /*
-             * Frontend routes
-             */
-            \Route::group([
-                // 'prefix'        => '',
-                'namespace' => $this->package_namespace . '\\FrontendController',
-                'middleware' => ['web'],
-            ], function (Router $router) {
+                    \Route::group([
+                        'prefix' => $route_load['prefix'],
+                        'namespace' => $route_load['namespace'],
+                        'middleware' => $route_load['middleware'],
+                    ], function (Router $router) use ($route_load) {
 
-                $route = realpath($this->package_path . '/../routes/frontend.php');
-                if (file_exists($route)) $this->loadRoutesFrom($route);
+                        if (file_exists($route_load['file'])) $this->loadRoutesFrom($route_load['file']);
 
-            });
+                    });
+
+                }
+
+            }
+
         }
 
         /*
@@ -152,7 +137,7 @@ trait ServiceProviderTrait
         $middlewares = [];
 
         if(\App::isLocal()){
-            $middlewares[] = 'clearcache';
+            $middlewares['clearcache'] = 'clearcache';
         }
 
         return $middlewares;
@@ -163,7 +148,7 @@ trait ServiceProviderTrait
         $middlewares = $this->middlewaresGlobal();
 
         // @TODO : replace with passport method
-        $middlewares[] = 'apiauth:razavi/' . $this->package_key;
+        $middlewares['apiauth'] = 'apiauth:razavi/' . $this->package_key;
 
         return $middlewares;
     }
@@ -197,6 +182,37 @@ trait ServiceProviderTrait
         return [
             realpath($this->package_path . '/../../config.php') => config_path( 'app/' . $this->package_key . '.php'),
         ];
+    }
+
+    protected function routesLoad()
+    {
+        $route_files = [];
+
+        /** api route */
+        $route_files['api-v1'] = [
+            'prefix' => config('app.' . $this->package_key . '.api_prefix', 'api'),
+            'namespace' => $this->package_namespace . '\\Api',
+            'middleware' => $this->middlewaresApi(),
+            'file' => realpath($this->package_path . '/../routes/api.php'),
+        ];
+
+        /** admin route */
+        $route_files['admin'] = [
+            'prefix' => config('admin.route.prefix'),
+            'namespace' => $this->package_namespace . '\\BackendController',
+            'middleware' => config('admin.route.middleware'),
+            'file' => realpath($this->package_path . '/../routes/backend.php'),
+        ];
+
+        /** front route */
+        $route_files['front'] = [
+            'prefix'        => '',
+            'namespace' => $this->package_namespace . '\\FrontendController',
+            'middleware' => ['web'],
+            'file' => realpath($this->package_path . '/../routes/frontend.php'),
+        ];
+
+        return $route_files;
     }
 
     /**
