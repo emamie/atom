@@ -1,5 +1,5 @@
 <?php
-namespace Emamie\Atom\admin\Extensions;
+namespace Emamie\Atom\Admin\Extensions;
 
 
 use Encore\Admin\Form\Field;
@@ -11,7 +11,7 @@ class CKEditor extends Field
         '/vendor/atom/ckeditor/adapters/jquery.js',
     ];
 
-    protected $view = 'atom::ckeditor';
+    protected $view = 'atom::form.ckeditor';
 
     public function render()
     {

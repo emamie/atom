@@ -1,11 +1,11 @@
 <?php
 
-namespace Emamie\Atom\admin\Extensions;
+namespace Emamie\Atom\Admin\Extensions;
 
 
 use Encore\Admin\Form\Field\Text;
 
-class DatePersianField extends Text
+class DatePersian extends Text
 {
     protected static $css = [
         '/vendor/atom/date_picker_persian/persian-datepicker.css',
@@ -22,7 +22,7 @@ class DatePersianField extends Text
     protected $minDate = null;
     protected $maxDate = null;
 
-    protected $view = 'atom::date_persian';
+    protected $view = 'atom::form.date_persian';
 
 
     public function format($format)
@@ -49,10 +49,10 @@ class DatePersianField extends Text
     public function prepare($value)
     {
         if ($value === '') {
-            $value = null;
+            return null;
         }
 
-        return $value;
+        return atomPersianToGregorian(atomNumToEN($value));
     }
 
     public function render()
@@ -64,11 +64,11 @@ class DatePersianField extends Text
         if(!empty($this->maxDate)){
             $str_min_max_date =$str_min_max_date.  " maxDate : " . $this->maxDate ;
         }
+
         $this->script = "$(document).ready(function() {
-       // alert(new persianDate('1399/06/25').unix());
-                            $('#" . $this->id . "').pDatepicker({
+                            $('{$this->getElementClassSelector()}:not(.pwt-datepicker-input-element)').pDatepicker({
                                 format: '" . $this->format . "',
-                                autoClose: true ,
+                                autoClose: true
                             });
                         });";
 
@@ -76,12 +76,10 @@ class DatePersianField extends Text
         $this->prepend('<i class="fa fa-calendar fa-fw date-persian" ></i>')
             ->defaultAttribute('style', 'width: 110px')
             ->defaultAttribute('type', 'text')
-            ->defaultAttribute('id', $this->id)
             ->defaultAttribute('name', $this->elementName ?: $this->formatName($this->column))
             ->defaultAttribute('value', old($this->column, $this->value()))
             ->defaultAttribute('class', 'form-control date-persian ' . $this->getElementClassString())
             ->defaultAttribute('placeholder', $this->getPlaceholder());
-
         return parent::render();
 
 

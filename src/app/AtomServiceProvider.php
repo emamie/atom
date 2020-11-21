@@ -22,8 +22,14 @@ class AtomServiceProvider extends ServiceProvider
 
         date_default_timezone_set(env('APP_TIMEZONE', "Asia/Tehran"));
 
-        \Encore\Admin\Form::extend('date_persian', admin\Extensions\DatePersianField::class);
-        \Encore\Admin\Form::extend('ckeditor', admin\Extensions\CKEditor::class);
+        \Encore\Admin\Form::extend('date_persian', Admin\Extensions\DatePersian::class);
+        \Encore\Admin\Form::extend('ckeditor', Admin\Extensions\CKEditor::class);
+        \Encore\Admin\Form::extend('select2', Admin\Extensions\Select2::class);
+        \Encore\Admin\Form::extend('table2', Admin\Extensions\Table2::class);
+        \Encore\Admin\Form::extend('number2', Admin\Extensions\Number2::class);
+        \Encore\Admin\Form::extend('phone2', Admin\Extensions\Phone2::class);
+        \Encore\Admin\Form::extend('mobile2', Admin\Extensions\Mobile2::class);
+        \Encore\Admin\Form::forget('DateMultiple');
         /*
          * Override ApiGenerator command for atom
          */
