@@ -50,6 +50,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+
+//        if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
+//            return redirect()->back()>withErrors(['msg', 'Page Expired']);
+//        }
+
         return parent::render($request, $exception);
     }
 }
