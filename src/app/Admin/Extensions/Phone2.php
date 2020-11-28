@@ -21,5 +21,7 @@ class Phone2 extends Number2
         if (strlen($value) < 3) {
             return 0;
         }
+
+        return $value;
     }
 }

@@ -18,9 +18,12 @@ class Mobile2 extends Number2
     public function prepare($value)
     {
         $value = parent::prepare($value);
+
         if (strlen($value) < 3) {
             return 0;
         }
+
+        return $value;
     }
 
 }

@@ -37,7 +37,8 @@ class Select2 extends Select
         $strAllowClear = var_export($allowClear, true);
 
         $script = <<<EOT
-$(document).on('change', "{$this->getElementClassSelector()}", function () {
+$(document).off('change.{$class}', "{$this->getElementClassSelector()}");
+$(document).on('change.{$class}', "{$this->getElementClassSelector()}", function () {
     var target = $(this).closest('.fields-group').find(".$class");
     $.get("$sourceUrl",{q : this.value}, function (data) {
         target.find("option").remove();
