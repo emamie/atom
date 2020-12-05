@@ -37,7 +37,9 @@
         "laravel-admin-ext/media-player": "dev-master",
         "sentry/sentry-laravel": "^2.0",
         "artisaninweb/laravel-soap": "^0.3.0.9",
-        "mews/captcha": "^3.2"
+        "mews/captcha": "^3.2",
+
+        "laravel/socialite": "^5.1"
     },
     "autoload": {
         "psr-4": {
@@ -53,5 +55,5 @@
                 "\\Emamie\\Atom\\AtomServiceProvider"
             ]
         }
-    } 
+    }
 }
