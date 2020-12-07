@@ -114,6 +114,7 @@ trait ServiceProviderTrait
 
         /*
          * publish configurations
+         * @TODO add running in console
          */
         $this->publishes(
             $this->publishConfigurations(), 'configurations');

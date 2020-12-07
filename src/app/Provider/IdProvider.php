@@ -14,7 +14,7 @@ class IdProvider extends AbstractProvider implements ProviderInterface
      */
     protected function getAuthUrl($state)
     {
-        return $this->buildAuthUrlFromBase('http://id.app.razavi.test/oauth/authorize', $state);
+        return $this->buildAuthUrlFromBase(config('app.atom.oauth2.url.base'), $state);
     }
 
     /**
@@ -22,7 +22,7 @@ class IdProvider extends AbstractProvider implements ProviderInterface
      */
     protected function getTokenUrl()
     {
-        return 'http://id.app.razavi.test/oauth/token';
+        return config('app.atom.oauth2.url.token');
     }
 
     /**
@@ -53,7 +53,7 @@ class IdProvider extends AbstractProvider implements ProviderInterface
      */
     protected function getUserByToken($token)
     {
-        $response = $this->getHttpClient()->get('http://id.app.razavi.test/api/user', [
+        $response = $this->getHttpClient()->get(config('app.atom.oauth2.url.user'), [
             'headers' => [
                 'Authorization' => 'Bearer ' . $token,
             ],
