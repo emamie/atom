@@ -75,12 +75,13 @@ class IdProvider extends AbstractProvider implements ProviderInterface
      */
     protected function mapUserToObject(array $user)
     {
-        dd($user);
+
         return (new User)->setRaw($user)->map([
             'id'       => $user['id'],
-            'nickname' => $user['display_name'],
-            'name'     => $user['display_name'],
-            'avatar'   => !empty($user['images']) ? $user['images'][0]['url'] : null,
+            'mobile' => $user['mobile'],
+            'name'     => $user['name'],
+            'family'     => $user['family'],
+            'nationalid'     => $user['nationalid'],
         ]);
     }
 }
