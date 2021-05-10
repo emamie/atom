@@ -30,7 +30,3 @@ if ( ! mix.inProduction()) {
 mix
     .mergeManifest()
 
-	// global library
-    .js('packages/atom/src/assets/js/global.js', 'public/vendor/atom/js')
-    .copyDirectory('packages/atom/src/assets/lib', 'public/vendor/atom/lib')
-
