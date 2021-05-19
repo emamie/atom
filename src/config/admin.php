@@ -132,7 +132,7 @@ return [
         'remember' => true,
 
         // Redirect to the specified URI when user is not authorized.
-        'redirect_to' => env('ADMIN_AUTH_REDIRECT_TO','backend/auth/login'),
+        'redirect_to' => env('ADMIN_AUTH_REDIRECT_TO','auth/login'),
 
         // The URIs that should be excluded from authorization.
         'excepts' => [
