@@ -30,7 +30,7 @@ trait ServiceProviderTrait
      *
      * @return void
      */
-    public function boot()
+    public function boot(\Illuminate\Routing\Router $router)
     {
         /*
          * Override ApiGenerator command for atom
@@ -119,7 +119,7 @@ trait ServiceProviderTrait
         $this->publishes(
             $this->publishConfigurations(), 'configurations');
 
-        $this->bootExtend();
+        $this->bootExtend($router);
 
     }
 
@@ -128,7 +128,7 @@ trait ServiceProviderTrait
         //
     }
 
-    protected function bootExtend()
+    protected function bootExtend(\Illuminate\Routing\Router $router)
     {
         //
     }

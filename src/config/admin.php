@@ -132,7 +132,7 @@ return [
         'remember' => true,
 
         // Redirect to the specified URI when user is not authorized.
-        'redirect_to' => 'auth/login',
+        'redirect_to' => env('ADMIN_AUTH_REDIRECT_TO','backend/auth/login'),
 
         // The URIs that should be excluded from authorization.
         'excepts' => [
@@ -402,5 +402,8 @@ return [
                 'filebrowserUploadUrl' => '/image/upload', // your url
             ]
         ]
+    ],
+    'custom' => [
+        'dashboard_route_name' => env('ADMIN_DASHBOARD_ROUTE_NAME', 'admin.dashboard'),
     ],
 ];
