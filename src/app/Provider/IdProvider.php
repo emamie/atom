@@ -73,7 +73,7 @@ class IdProvider extends AbstractProvider implements ProviderInterface
     /**
      * {@inheritdoc}
      */
-    protected function mapUserToObject(array $user)
+    protected function mapUserToObject(array $user_data)
     {
         $user = new User;
         foreach ($user_data as $key => $value)
