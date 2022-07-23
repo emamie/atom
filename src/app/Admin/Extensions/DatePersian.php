@@ -66,8 +66,9 @@ class DatePersian extends Text
         }
 
         $this->script = "$(document).ready(function() {
-                            $('{$this->getElementClassSelector()}:not(.pwt-datepicker-input-element)').pDatepicker({
+                            $('{$this->getElementClassSelector()}:not(.pwt-datepicker-input-element)').persianDatepicker({
                                 format: '" . $this->format . "',
+                                Placement: 'bottom',
                                 autoClose: true
                             });
                         });";
