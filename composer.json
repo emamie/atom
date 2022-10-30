@@ -27,7 +27,7 @@
         "encore/laravel-admin": "1.8.*",
         "maatwebsite/excel": "3.1.x-dev",
         "farhadi/intl-datetime": "dev-master",
-        "laravel-lang/lang": "dev-master",
+        "laravel-lang/lang": "dev-main",
         "predis/predis": "^2.0@dev",
         "guzzlehttp/guzzle": "~7.0",
         "laravel/helpers": "^1.2",
