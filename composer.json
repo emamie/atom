@@ -25,7 +25,7 @@
         "doctrine/dbal": "~2.10",
         "mpociot/laravel-apidoc-generator": "^4.8",
         "encore/laravel-admin": "1.8.*",
-        "maatwebsite/excel": "3.2.x-dev",
+        "maatwebsite/excel": "3.1.x-dev",
         "farhadi/intl-datetime": "dev-master",
         "caouecs/laravel-lang": "dev-master",
         "predis/predis": "^2.0@dev",
