@@ -27,4 +27,11 @@ return [
         ]
     ],
 
+    'api_service' =>[
+        "headers" =>  [
+            'Content-Type' => env("API_HEADER_CONTENT_TYPE",'application/json'),
+            'Accept' => env("API_HEADER_ACCEPT",'application/json'),
+        ]
+    ]
+
 ];

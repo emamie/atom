@@ -8,6 +8,7 @@ use Emamie\Atom\ApiGenerator;
 use PHPUnit\Test\Extension;
 use Encore\Admin\Form;
 use Razavi\Atom\Services\RestWebService;
+use Emamie\Atom\Services\RestApiService;
 use Emamie\Atom\Exceptions;
 
 class AtomServiceProvider extends ServiceProvider
@@ -136,7 +137,17 @@ class AtomServiceProvider extends ServiceProvider
     }
     protected function registerConnectionServices()
     {
-        $this->app->bind('RestWebService', RestWebService::class);
+        // @TODO: remove after class RestApiService
+        // $this->app->bind('RestWebService', RestWebService::class);
+        
+        $this->app->bind(
+            'Emamie\Atom\Services\RestApiServiceInterface',
+            'Emamie\Atom\Services\RestApiService'
+        );
+        // $this->app->bind('RestApiService', RestApiService::class);
+
+
+     
     }
 
     protected function publishConfigurations()
@@ -151,5 +162,7 @@ class AtomServiceProvider extends ServiceProvider
             realpath($package_path . '/../../config.php') => config_path( 'app/atom.php'),
         ];
     }
+
+    
 
 }

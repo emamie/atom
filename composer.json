@@ -47,6 +47,9 @@
         },
         "files": [
             "src/app/Helper/Tools.php"
+        ],
+        "classmap": [            
+            "app/Services" 
         ]
     },
     "extra": {
