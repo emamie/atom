@@ -40,7 +40,7 @@ class RestApiService implements RestApiServiceInterface
       $this->user = $user;
     }
 
-public function requestPost($method,$body){   
+  public function requestPost($method,$body){   
     $output = ["status" => null, "data" => NULL,"message" => null];
     
     $body_json = json_encode($body);
@@ -72,9 +72,9 @@ public function requestPost($method,$body){
     }
     
     return $output;
-}
+  }
 
-public function handerErrorJson($decoded) {
+  public function handerErrorJson($decoded) {
     //Backwards compatability.
     $error = "";
     if (!function_exists('json_last_error')) {
