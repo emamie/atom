@@ -64,6 +64,7 @@ class AtomServiceProvider extends ServiceProvider
                 __DIR__ . '/../templates/AdminLTE-2.3.5-RTL/css' => public_path('vendor/laravel-admin/AdminLTE/dist/css'),
                 __DIR__ . '/../templates/AdminLTE-2.3.5-RTL/fonts' => public_path('vendor/laravel-admin/AdminLTE/dist/fonts'),
                 __DIR__ . '/../assets/lib' => public_path('vendor/atom'),
+                __DIR__ . '/../assets/fonts' => public_path('vendor/atom/fonts'),
                 __DIR__ . '/../assets/img' => public_path('vendor/atom/img'),
                 __DIR__ . '/../assets/css/bootstrap.rtl.full.min.css' => public_path('vendor/laravel-admin/AdminLTE/bootstrap/css/bootstrap.min.css'),
             ], ['atom','assets','atom-assets']);
