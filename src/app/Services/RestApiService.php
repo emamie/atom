@@ -40,12 +40,12 @@ class RestApiService implements RestApiServiceInterface
       $this->user = $user;
     }
 
-  public function requestPost($method,$body){   
-    $output = ["status" => null, "data" => NULL,"message" => null];
+  public function requestPost($method, $body) {
+    $output = ["status" => null, "data" => null,"message" => null];
     
     $body_json = json_encode($body);
    
-    try{
+    try {
         $response = $this->service_rest->post($this->url.'/' . $method, [
             'headers' => $this->header,
             'body' => $body_json,
@@ -55,19 +55,20 @@ class RestApiService implements RestApiServiceInterface
         
         if ($response->getStatusCode() === 200) {
     
-            $json_data = json_decode($response->getBody()->getContents(),true);
+            $json_data = json_decode($response->getBody()->getContents(), true);
              // اگر دی کد کردن جیسون خطا داشته باشد
             if (!empty($this->handerErrorJson($json_data))) {
                 $output["message"] = $this->handerErrorJson($json_data);
                 return $output;
             }
-            $output["data"] = $json_data ; 
+            $output["data"] = $json_data ;
            
     
-        }else{
+        } else {
             $output["message"] = "خطا در دریافت اطلاعات";
         }
-    }catch(Exception $ex){
+    } catch (Exception $ex) {
+        $output["status"] = -1;
         $output["message"] = $ex->getMessage();
     }
     
@@ -78,11 +79,10 @@ class RestApiService implements RestApiServiceInterface
     //Backwards compatability.
     $error = "";
     if (!function_exists('json_last_error')) {
-      if ($decoded === FALSE || $decoded === NULL) {
+      if ($decoded === false || $decoded === null) {
         $error = 'Could not decode JSON! -';
       }
-    }
-    else {
+    } else {
 
       //Get the last JSON error.
       $jsonError = json_last_error();
